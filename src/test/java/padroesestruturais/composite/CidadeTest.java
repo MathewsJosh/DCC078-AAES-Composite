@@ -9,6 +9,10 @@ class CidadeTest {
     @Test
     void deveRetornarCEPCidade() {
         Bairro bairro1 = new Bairro("Zona Norte");
+        Rua rua11 = new Rua("123456", "Orquideas Pomposas");
+        Rua rua12 = new Rua("123765", "Flores Perfumadas");
+        bairro1.addConteudo(rua11);
+        bairro1.addConteudo(rua12);
 
         Bairro bairro2 = new Bairro("Zona Sul");
         Rua rua21 = new Rua("372312", "Banana Lima");
@@ -30,6 +34,8 @@ class CidadeTest {
 
         assertEquals("Bairro: Nobre\n" +
                 "Bairro: Zona Norte\n" +
+                "Rua: 123456 - nome: Orquideas Pomposas\n" +
+                "Rua: 123765 - nome: Flores Perfumadas\n" +
                 "Bairro: Zona Sul\n" +
                 "Rua: 372312 - nome: Banana Lima\n" +
                 "Bairro: COHAB\n" +
@@ -46,6 +52,18 @@ class CidadeTest {
         }
         catch (NullPointerException e) {
             assertEquals("Cidade sem CEP!", e.getMessage());
+        }
+    }
+
+    @Test
+    void deveRetornarExecacaoCidadeSemNome() {
+        try {
+            Cidade cidade = new Cidade();
+            cidade.getNomeCidade();
+            fail();
+        }
+        catch (NullPointerException e) {
+            assertEquals("Cidade sem nome!", e.getMessage());
         }
     }
 }
